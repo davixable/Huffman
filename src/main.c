@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "huffman.h"
 #include "mem.h"
@@ -21,12 +22,14 @@ int main(int argc, char **argv){
         createMap(root, current_code, 0, map);
         compress(argv[1], source, occurences, map);
 
+        //TO DO: print compression statistics
+        
         free(source);
         free(occurences);
         exit(EXIT_SUCCESS);
     }
     
-    if(argc == 3 && argv[2] == "-decode"){
+    if (argc == 3 && strcmp(argv[2], "-decode") == 0) {
         //TO DO: implement decompression
     }
 
