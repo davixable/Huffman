@@ -1,8 +1,16 @@
+#include <stdbool.h>
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 #define MAX_SYMBOLS 256
 
-typedef struct HuffmanNode HuffmanNode;
+typedef struct HuffmanNode {
+    unsigned char character;      // il carattere originale
+    int frequency;       // la frequenza del carattere
+    struct HuffmanNode *left; 
+    struct HuffmanNode *right;   
+} HuffmanNode;
+
+
 typedef struct MinHeap MinHeap;
 
 HuffmanNode *createNode(unsigned char character, unsigned int frequency);

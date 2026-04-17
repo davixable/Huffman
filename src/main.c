@@ -7,6 +7,7 @@
 #include "file_utils.h"
 #include "frequency.h"
 #include "compress.h"
+#include "decompress.h"
 #define MAX_SYMBOLS 256
 
 int main(int argc, char **argv){
@@ -23,14 +24,15 @@ int main(int argc, char **argv){
         compress(argv[1], source, occurences, map);
 
         //TO DO: print compression statistics
-        
+
         free(source);
         free(occurences);
         exit(EXIT_SUCCESS);
     }
     
     if (argc == 3 && strcmp(argv[2], "-decode") == 0) {
-        //TO DO: implement decompression
+        decompress(argv[1]);
+        exit(EXIT_SUCCESS);
     }
 
     fprintf(stderr, "Error. Usage: <program_name> <file_name> || <program_name> <file_name> -decode\n");

@@ -7,13 +7,6 @@
 #include "huffman.h"
 
 
-typedef struct HuffmanNode {
-    unsigned char character;      // il carattere originale
-    int frequency;       // la frequenza del carattere
-    struct HuffmanNode *left; 
-    struct HuffmanNode *right;   
-} HuffmanNode;
-
 
 typedef struct MinHeap {
     unsigned int size;      // numero attuale di nodi nel minHeap

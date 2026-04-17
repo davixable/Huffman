@@ -4,3 +4,4 @@ huffman.exe
 *.compressed
 *.o
 *.obj
+*.exe

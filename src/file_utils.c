@@ -3,7 +3,11 @@
 #include "mem.h"
 #include "file_utils.h"
 
-
+/* TODO: aprire il file in modalità binaria per evitare problemi con i caratteri \r\n , 
+ * inoltre aggiungere un size_t file_size come parametro di output per restituire la 
+ * dimensione del file letto, in modo da evitare di dover chiamare strlen().
+ * Così facendo la compressione sarà 100% lossless.
+*/
 char *readFromFile(const char *filename) {
     FILE *fp = fopen(filename, "r");
     if(fp == NULL){

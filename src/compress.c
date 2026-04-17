@@ -5,7 +5,21 @@
 
 void compress(const char *input_filename, const char *source, int *occurances, char map[MAX_SYMBOLS][MAX_SYMBOLS]){
     char output_filename[1024];
-    sprintf(output_filename, "%s.compressed", input_filename);
+    strcpy(output_filename, input_filename);
+
+    // Cerchiamo ".txt" nel nome del file di input
+    char *extension_pos = strstr(output_filename, ".txt");
+    
+    if(extension_pos == NULL){
+        fprintf(stderr, "Errore: il file non è stato compresso usando questo programma.\n");
+        exit(EXIT_FAILURE);
+    } else{
+        *extension_pos = '\0'; // rimuoviamo l'estensione
+    }
+
+    // Aggiungiamo l'estensione corretta per il file compresso
+    strcat(output_filename, ".compressed");
+
 
     FILE *output_file = fopen(output_filename, "wb");
     if(!output_file){
@@ -16,7 +30,7 @@ void compress(const char *input_filename, const char *source, int *occurances, c
     /* Header del file compresso.
        Salviamo sia la lunghezza del testo originale che
        le frequenze, in modo da poter succesivamente decomprimere
-       decomprimere il file ricostruendo l'albero di Huffman. 
+       il file ricostruendo l'albero di Huffman. 
     */
     size_t original_length = strlen(source);
     fwrite(&original_length, sizeof(size_t), 1, output_file);   
