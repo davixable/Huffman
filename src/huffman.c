@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "mem.h"
 #include "frequency.h"
 #include "huffman.h"
 
@@ -134,7 +135,7 @@ HuffmanNode *buildHuffmanTree(int *occurences){
 }
 
 
-void createMap(HuffmanNode *root, char *current_code, int depth, char **map){
+void createMap(HuffmanNode *root, char *current_code, int depth, char map[MAX_SYMBOLS][MAX_SYMBOLS]){
     if(root == NULL) return;
 
     if(root->left){

@@ -1,0 +1,6 @@
+huffman
+huffman.exe
+*.out
+*.compressed
+*.o
+*.obj
