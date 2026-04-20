@@ -17,13 +17,10 @@ int main(int argc, char **argv){
         char map[MAX_SYMBOLS][MAX_SYMBOLS] = {0};
         char current_code[256];
         int *occurences = countCharsOccurences(source);
-        double input_entropy = getEntropy(occurences);
 
         HuffmanNode *root = buildHuffmanTree(occurences);
         createMap(root, current_code, 0, map);
         compress(argv[1], source, occurences, map);
-
-        //TO DO: print compression statistics
 
         free(source);
         free(occurences);

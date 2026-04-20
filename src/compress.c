@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "compress.h"
+#include "frequency.h"
 
 void compress(const char *input_filename, const char *source, int *occurances, char map[MAX_SYMBOLS][MAX_SYMBOLS]){
     char output_filename[1024];
@@ -60,7 +61,7 @@ void compress(const char *input_filename, const char *source, int *occurances, c
         }
     }
 
-    // Padding degli ultimi bit rimasti in sospeso.
+    // Padding degli ultimi bit rimasti in sospeso
     if (bit_count > 0) {
         buffer = buffer << (8 - bit_count); 
         fwrite(&buffer, sizeof(unsigned char), 1, output_file);
@@ -68,4 +69,11 @@ void compress(const char *input_filename, const char *source, int *occurances, c
 
     fclose(output_file);
     printf("File compresso salvato con successo.\n");
+
+    double input_entropy = getEntropy(occurances);
+    double output_entropy = getEntropy(get_file_occurrences(output_filename, occurances, 256));
+
+    printf("Entropia del file originale: %.2f\n", input_entropy);
+    printf("Entropia del file compresso: %.2f\n", output_entropy);
+
 }

@@ -5,6 +5,33 @@
 #include "frequency.h"
 
 
+// Funzione che calcola le occorrenze dei byte in un file.
+// "offset" permette di saltare i primi N byte.
+int *get_file_occurrences(const char* filename, int* occurrences, long offset) {
+    for(int i = 0; i < 256; i++) {
+        occurrences[i] = 0;
+    }
+
+    FILE *f = fopen(filename, "rb");
+    if (!f) {
+        fprintf(stderr, "Errore in apertura del file per l'entropia.\n");
+        return;
+    }
+
+    if (offset > 0) {
+        fseek(f, offset, SEEK_SET);
+    }
+
+    int c;
+    while ((c = fgetc(f)) != EOF) {
+        occurrences[c]++;
+    }
+
+    fclose(f);
+    return occurances;
+}
+
+
 int *countCharsOccurences(const char *source){
     int *occurences = (int*) wcalloc(NUM_CHARS,sizeof(int));
 
@@ -35,3 +62,4 @@ double getEntropy(const int* occurences){
 
     return -entropy;
 }
+
